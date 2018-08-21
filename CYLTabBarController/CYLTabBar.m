@@ -383,6 +383,12 @@ static void *const CYLTabBarContext = (void*)&CYLTabBarContext;
             return self.plusButton;
         }
     }
+    //BugFixed: iOS10.3.1 上面点击无反应
+    if(![self.subviews containsObject:self.tabBarButtonArray.firstObject]) {
+    ///如果无需重新布局: 调用下面的语法
+    self.tabBarButtonArray = [self tabBarButtonFromTabBarSubviews:[self sortedSubviews]];
+
+    }
     NSArray *tabBarButtons = self.tabBarButtonArray;
     if (self.tabBarButtonArray.count == 0) {
         tabBarButtons = [self tabBarButtonFromTabBarSubviews:self.subviews];
